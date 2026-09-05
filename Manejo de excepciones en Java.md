@@ -1,4 +1,3 @@
-
 ## **1\. Objetivo de aprendizaje**
 
 Al finalizar la práctica, el estudiante será capaz de **identificar, capturar, propagar y generar excepciones en Java**, aplicando buenas prácticas de manejo de errores mediante `try`, `catch`, `finally`, `throws`, `throw`, excepciones específicas y `try-with-resources`.
@@ -7,14 +6,13 @@ Al finalizar la práctica, el estudiante será capaz de **identificar, capturar,
 
 El estudiante podrá:
 
-* Diferenciar excepciones verificadas y no verificadas.  
-* Utilizar correctamente `try`, `catch` y `finally`.  
-* Propagar excepciones con `throws`.  
-* Lanzar excepciones mediante `throw`.  
-* Crear y utilizar una excepción personalizada.  
-* Utilizar `try-with-resources`.  
-* Aplicar criterios básicos de buenas prácticas en el manejo de excepciones.
-
+- Diferenciar excepciones verificadas y no verificadas.
+- Utilizar correctamente `try`, `catch` y `finally`.
+- Propagar excepciones con `throws`.
+- Lanzar excepciones mediante `throw`.
+- Crear y utilizar una excepción personalizada.
+- Utilizar `try-with-resources`.
+- Aplicar criterios básicos de buenas prácticas en el manejo de excepciones.
 
 # **2\. Situación de trabajo**
 
@@ -32,10 +30,10 @@ abc
 
 Durante el procesamiento pueden ocurrir distintos problemas:
 
-* el archivo no existe;  
-* una línea no contiene un número;  
-* una calificación está fuera del rango permitido;  
-* ocurre un error de lectura.
+- el archivo no existe;
+- una línea no contiene un número;
+- una calificación está fuera del rango permitido;
+- ocurre un error de lectura.
 
 La práctica consiste en hacer que la aplicación maneje estos problemas de manera controlada.
 
@@ -53,20 +51,21 @@ public class ProcesadorCalificaciones {
 
     public static void main(String\[\] args) throws IOException {
 
-        BufferedReader lector \=  
-            new BufferedReader(  
-                new FileReader("calificaciones.txt")  
+        BufferedReader lector \=
+            new BufferedReader(
+                new FileReader("calificaciones.txt")
             );
 
         String linea;
 
-        while ((linea \= lector.readLine()) \!= null) {  
-            int calificacion \= Integer.parseInt(linea);  
-            System.out.println(calificacion);  
+        while ((linea \= lector.readLine()) \!= null) {
+            int calificacion \= Integer.parseInt(linea);
+            System.out.println(calificacion);
         }
 
-        lector.close();  
-    }  
+        lector.close();
+    }
+
 }
 
 Ejecutar primero con un archivo válido y después con un archivo que contenga:
@@ -80,10 +79,10 @@ abc
 
 Registrar:
 
-1. ¿Qué excepción aparece?  
-2. ¿En qué línea ocurre?  
-3. ¿Continúa la ejecución?  
-4. ¿Qué información proporciona el *stack trace*?
+1. ¿Qué excepción aparece?
+2. ¿En qué línea ocurre?
+3. ¿Continúa la ejecución?
+4. ¿Qué información proporciona el _stack trace_?
 
 El material explica que el objeto excepción contiene información sobre el tipo de error y el estado del programa cuando ocurrió, y que lanzar una excepción consiste en crear ese objeto y pasarlo al runtime.
 
@@ -95,16 +94,17 @@ Modificar el procesamiento:
 
 try {
 
-    int calificacion \=  
+    int calificacion \=
         Integer.parseInt(linea);
 
     System.out.println(calificacion);
 
 } catch (NumberFormatException e) {
 
-    System.out.println(  
-        "Valor inválido: " \+ linea  
-    );  
+    System.out.println(
+        "Valor inválido: " \+ linea
+    );
+
 }
 
 Ejecutar nuevamente.
@@ -116,7 +116,6 @@ Ahora el programa no termina cuando encuentra:
 abc
 
 sino que procesa las líneas siguientes.
-
 
 # **5\. Actividad de aprendizaje 1: comparar comportamiento**
 
@@ -134,17 +133,16 @@ catch (NumberFormatException e)
 
 Completar:
 
-| Aspecto | Sin manejo | Con manejo |
-| ----- | ----- | ----- |
-| ¿Termina el programa? |  |  |
-| ¿Se muestra el error? |  |  |
-| ¿Se procesan las líneas posteriores? |  |  |
-| ¿Puede recuperarse el programa? |  |  |
+| Aspecto                              | Sin manejo | Con manejo |
+| ------------------------------------ | ---------- | ---------- |
+| ¿Termina el programa?                |            |            |
+| ¿Se muestra el error?                |            |            |
+| ¿Se procesan las líneas posteriores? |            |            |
+| ¿Puede recuperarse el programa?      |            |            |
 
 ### **Reflexión**
 
 ¿Qué ventaja proporciona capturar una excepción que el programa puede anticipar?
-
 
 # **Parte III. Múltiples excepciones**
 
@@ -164,18 +162,18 @@ Modificar:
 
 try {
 
-    BufferedReader lector \=  
-        new BufferedReader(  
-            new FileReader("calificaciones.txt")  
+    BufferedReader lector \=
+        new BufferedReader(
+            new FileReader("calificaciones.txt")
         );
 
 } catch (java.io.FileNotFoundException e) {
 
-    System.err.println(  
-        "No se encontró el archivo."  
-    );  
-}
+    System.err.println(
+        "No se encontró el archivo."
+    );
 
+}
 
 # **7\. Capturar excepciones específicas primero**
 
@@ -187,24 +185,23 @@ try {
 
 } catch (NumberFormatException e) {
 
-    System.err.println(  
-        "Formato numérico inválido: "  
-        \+ e.getMessage()  
+    System.err.println(
+        "Formato numérico inválido: "
+        \+ e.getMessage()
     );
 
 } catch (IllegalArgumentException e) {
 
-    System.err.println(  
-        "Argumento inválido: "  
-        \+ e.getMessage()  
-    );  
-}
+    System.err.println(
+        "Argumento inválido: "
+        \+ e.getMessage()
+    );
 
+}
 
 ### **Pregunta**
 
 ¿Por qué sería incorrecto invertir el orden anterior?
-
 
 # **Parte IV. `finally`**
 
@@ -216,45 +213,43 @@ BufferedReader lector \= null;
 
 try {
 
-    lector \=  
-        new BufferedReader(  
-            new FileReader("calificaciones.txt")  
+    lector \=
+        new BufferedReader(
+            new FileReader("calificaciones.txt")
         );
 
     // procesamiento
 
 } catch (IOException e) {
 
-    System.err.println(  
-        "Error de entrada/salida: "  
-        \+ e.getMessage()  
+    System.err.println(
+        "Error de entrada/salida: "
+        \+ e.getMessage()
     );
 
 } finally {
 
-    if (lector \!= null) {  
-        try {  
-            lector.close();  
-        } catch (IOException e) {  
-            System.err.println(  
-                "No fue posible cerrar el archivo."  
-            );  
-        }  
-    }  
+    if (lector \!= null) {
+        try {
+            lector.close();
+        } catch (IOException e) {
+            System.err.println(
+                "No fue posible cerrar el archivo."
+            );
+        }
+    }
+
 }
-
-
 
 ### **Actividad**
 
 Probar:
 
-* archivo correcto;  
-* archivo inexistente;  
-* contenido inválido.
+- archivo correcto;
+- archivo inexistente;
+- contenido inválido.
 
 ¿En qué situaciones se ejecuta `finally`?
-
 
 # **Parte V. `try-with-resources`**
 
@@ -265,34 +260,35 @@ El material recomienda también `try-with-resources` para objetos que implementa
 Reescribir:
 
 try (  
-    BufferedReader lector \=  
-        new BufferedReader(  
-            new FileReader("calificaciones.txt")  
-        )  
+ BufferedReader lector \=  
+ new BufferedReader(  
+ new FileReader("calificaciones.txt")  
+ )  
 ) {
 
     String linea;
 
     while ((linea \= lector.readLine()) \!= null) {
 
-        System.out.println(linea);  
+        System.out.println(linea);
     }
 
 } catch (IOException e) {
 
-    System.err.println(  
-        "Error al leer el archivo: "  
-        \+ e.getMessage()  
-    );  
+    System.err.println(
+        "Error al leer el archivo: "
+        \+ e.getMessage()
+    );
+
 }
 
 ### **Comparación**
 
 Responder:
 
-* ¿Qué código desapareció?  
-* ¿Quién cierra ahora el archivo?  
-* ¿Qué versión resulta más clara?
+- ¿Qué código desapareció?
+- ¿Quién cierra ahora el archivo?
+- ¿Qué versión resulta más clara?
 
 ---
 
@@ -303,22 +299,23 @@ Responder:
 Crear:
 
 public static void validarCalificacion(  
-        int calificacion) {
+ int calificacion) {
 
-    if (calificacion \< 0 ||  
+    if (calificacion \< 0 ||
         calificacion \> 100\) {
 
-        throw new IllegalArgumentException(  
-            "La calificación debe estar entre 0 y 100: "  
-            \+ calificacion  
-        );  
-    }  
+        throw new IllegalArgumentException(
+            "La calificación debe estar entre 0 y 100: "
+            \+ calificacion
+        );
+    }
+
 }
 
 Utilizar:
 
 int calificacion \=  
-    Integer.parseInt(linea);
+ Integer.parseInt(linea);
 
 validarCalificacion(calificacion);
 
@@ -328,26 +325,26 @@ El material señala que `throw` requiere un objeto `Throwable` y se utiliza para
 
 Agregar validaciones para detectar:
 
-* línea vacía;  
-* número negativo;  
-* número mayor de 100\.
+- línea vacía;
+- número negativo;
+- número mayor de 100\.
 
 Ejemplo:
 
 if (linea.isBlank()) {  
-    throw new IllegalArgumentException(  
-        "La línea no puede estar vacía."  
-    );  
+ throw new IllegalArgumentException(  
+ "La línea no puede estar vacía."  
+ );  
 }
 
 Cada equipo deberá definir:
 
-| Condición | Excepción | Mensaje |
-| ----- | ----- | ----- |
-| Línea vacía |  |  |
-| Valor no numérico |  |  |
-| Valor \< 0 |  |  |
-| Valor \> 100 |  |  |
+| Condición         | Excepción | Mensaje |
+| ----------------- | --------- | ------- |
+| Línea vacía       |           |         |
+| Valor no numérico |           |         |
+| Valor \< 0        |           |         |
+| Valor \> 100      |           |         |
 
 El material recomienda utilizar excepciones lo más específicas posible y evitar declarar genéricamente `throws Exception`.
 
@@ -358,41 +355,42 @@ El material recomienda utilizar excepciones lo más específicas posible y evita
 Separar responsabilidades:
 
 public static void procesarArchivo(  
-        String nombreArchivo)  
-        throws IOException {
+ String nombreArchivo)  
+ throws IOException {
 
-    try (  
-        BufferedReader lector \=  
-            new BufferedReader(  
-                new FileReader(nombreArchivo)  
-            )  
+    try (
+        BufferedReader lector \=
+            new BufferedReader(
+                new FileReader(nombreArchivo)
+            )
     ) {
 
         String linea;
 
-        while ((linea \= lector.readLine()) \!= null) {  
-            System.out.println(linea);  
-        }  
-    }  
+        while ((linea \= lector.readLine()) \!= null) {
+            System.out.println(linea);
+        }
+    }
+
 }
 
 Y en `main`:
 
 try {
 
-    procesarArchivo(  
-        "calificaciones.txt"  
+    procesarArchivo(
+        "calificaciones.txt"
     );
 
 } catch (IOException e) {
 
-    System.err.println(  
-        "No fue posible procesar el archivo."  
-    );  
+    System.err.println(
+        "No fue posible procesar el archivo."
+    );
+
 }
 
 El material indica que, en ciertos casos, es preferible que un método superior en la pila de llamadas maneje la excepción; en tal situación, el método que puede generarla la especifica mediante `throws`.
-
 
 # **Parte VIII. Crear una excepción personalizada**
 
@@ -403,41 +401,43 @@ El material señala que pueden crearse clases propias de excepción cuando sea n
 Crear:
 
 public class CalificacionInvalidaException  
-        extends Exception {
+ extends Exception {
 
-    public CalificacionInvalidaException(  
+    public CalificacionInvalidaException(
             String mensaje) {
 
-        super(mensaje);  
-    }  
+        super(mensaje);
+    }
+
 }
 
 Modificar:
 
 public static void validarCalificacion(  
-        int calificacion)  
-        throws CalificacionInvalidaException {
+ int calificacion)  
+ throws CalificacionInvalidaException {
 
-    if (calificacion \< 0 ||  
+    if (calificacion \< 0 ||
         calificacion \> 100\) {
 
-        throw new CalificacionInvalidaException(  
-            "Calificación fuera de rango: "  
-            \+ calificacion  
-        );  
-    }  
+        throw new CalificacionInvalidaException(
+            "Calificación fuera de rango: "
+            \+ calificacion
+        );
+    }
+
 }
 
 Capturar:
 
 catch (CalificacionInvalidaException e) {
 
-    System.err.println(  
-        "Error en los datos: "  
-        \+ e.getMessage()  
-    );  
-}  
----
+    System.err.println(
+        "Error en los datos: "
+        \+ e.getMessage()
+    );
+
+## }
 
 # **Parte IX. Actividad integradora**
 
@@ -471,14 +471,14 @@ Promedio de valores válidos: 84.00
 
 La solución deberá utilizar:
 
-1. `try`.  
-2. Al menos dos bloques `catch`.  
-3. `try-with-resources`.  
-4. `throws`.  
-5. `throw`.  
-6. `NumberFormatException`.  
-7. `IOException`.  
-8. Una excepción personalizada.  
+1. `try`.
+2. Al menos dos bloques `catch`.
+3. `try-with-resources`.
+4. `throws`.
+5. `throw`.
+6. `NumberFormatException`.
+7. `IOException`.
+8. Una excepción personalizada.
 9. Mensajes descriptivos.
 
 ---
@@ -495,37 +495,37 @@ public class ProcesadorCalificaciones {
 
         try {
 
-            double promedio \=  
-                calcularPromedio(  
-                    "calificaciones.txt"  
+            double promedio \=
+                calcularPromedio(
+                    "calificaciones.txt"
                 );
 
-            System.out.printf(  
-                "Promedio: %.2f%n",  
-                promedio  
+            System.out.printf(
+                "Promedio: %.2f%n",
+                promedio
             );
 
         } catch (IOException e) {
 
-            System.err.println(  
-                "No fue posible procesar el archivo: "  
-                \+ e.getMessage()  
-            );  
-        }  
+            System.err.println(
+                "No fue posible procesar el archivo: "
+                \+ e.getMessage()
+            );
+        }
     }
 
-    public static double calcularPromedio(  
-            String archivo)  
+    public static double calcularPromedio(
+            String archivo)
             throws IOException {
 
-        double suma \= 0;  
+        double suma \= 0;
         int contador \= 0;
 
-        try (  
-            BufferedReader lector \=  
-                new BufferedReader(  
-                    new FileReader(archivo)  
-                )  
+        try (
+            BufferedReader lector \=
+                new BufferedReader(
+                    new FileReader(archivo)
+                )
         ) {
 
             String linea;
@@ -534,54 +534,54 @@ public class ProcesadorCalificaciones {
 
                 try {
 
-                    int calificacion \=  
-                        Integer.parseInt(  
-                            linea.trim()  
+                    int calificacion \=
+                        Integer.parseInt(
+                            linea.trim()
                         );
 
-                    validarCalificacion(  
-                        calificacion  
+                    validarCalificacion(
+                        calificacion
                     );
 
-                    suma \+= calificacion;  
+                    suma \+= calificacion;
                     contador++;
 
                 } catch (NumberFormatException e) {
 
-                    System.err.println(  
-                        "Dato no numérico: "  
-                        \+ linea  
+                    System.err.println(
+                        "Dato no numérico: "
+                        \+ linea
                     );
 
-                } catch (  
-                    CalificacionInvalidaException e  
+                } catch (
+                    CalificacionInvalidaException e
                 ) {
 
-                    System.err.println(  
-                        e.getMessage()  
-                    );  
-                }  
-            }  
+                    System.err.println(
+                        e.getMessage()
+                    );
+                }
+            }
         }
 
-        return suma / contador;  
+        return suma / contador;
     }
 
-    public static void validarCalificacion(  
-            int calificacion)  
+    public static void validarCalificacion(
+            int calificacion)
             throws CalificacionInvalidaException {
 
-        if (calificacion \< 0 ||  
+        if (calificacion \< 0 ||
             calificacion \> 100\) {
 
-            throw new CalificacionInvalidaException(  
-                "Calificación fuera de rango: "  
-                \+ calificacion  
-            );  
-        }  
-    }  
-}  
----
+            throw new CalificacionInvalidaException(
+                "Calificación fuera de rango: "
+                \+ calificacion
+            );
+        }
+    }
+
+## }
 
 # **Parte X. Aplicar buenas prácticas**
 
@@ -591,7 +591,7 @@ Analizar el siguiente código:
 
 try {
 
-    int numero \=  
+    int numero \=
         Integer.parseInt(valor);
 
 } catch (Throwable e) {
@@ -602,13 +602,12 @@ Identificar al menos tres problemas.
 
 ### **Aspectos esperados**
 
-* Captura `Throwable`.  
-* Ignora completamente la excepción.  
-* No utiliza una excepción específica.  
-* No proporciona información del error.
+- Captura `Throwable`.
+- Ignora completamente la excepción.
+- No utiliza una excepción específica.
+- No proporciona información del error.
 
 Proponer una versión mejorada.
-
 
 # **17\. Documentar excepciones**
 
@@ -621,35 +620,35 @@ Ejemplo:
  \*  
  \* @param calificacion valor a validar  
  \* @throws CalificacionInvalidaException  
- \*         si el valor está fuera del rango 0-100  
+ \* si el valor está fuera del rango 0-100  
  \*/  
 public static void validarCalificacion(  
-        int calificacion)  
-        throws CalificacionInvalidaException {  
-    // ...  
+ int calificacion)  
+ throws CalificacionInvalidaException {  
+ // ...  
 }
 
 ### **Actividad**
 
 Agregar Javadoc a:
 
-* `validarCalificacion()`;  
-* `calcularPromedio()`.
+- `validarCalificacion()`;
+- `calcularPromedio()`.
 
 # **18\. Buenas prácticas a verificar**
 
 Antes de entregar, revisar:
 
-| Buena práctica | Cumple |
-| ----- | ----- |
-| Utiliza excepciones específicas | ☐ |
-| No captura `Throwable` | ☐ |
-| No ignora excepciones | ☐ |
-| Usa mensajes descriptivos | ☐ |
-| Captura primero excepciones específicas | ☐ |
-| Utiliza `try-with-resources` | ☐ |
-| Documenta `throws` | ☐ |
-| No utiliza `throws Exception` sin necesidad | ☐ |
+| Buena práctica                              | Cumple |
+| ------------------------------------------- | ------ |
+| Utiliza excepciones específicas             | ☐      |
+| No captura `Throwable`                      | ☐      |
+| No ignora excepciones                       | ☐      |
+| Usa mensajes descriptivos                   | ☐      |
+| Captura primero excepciones específicas     | ☐      |
+| Utiliza `try-with-resources`                | ☐      |
+| Documenta `throws`                          | ☐      |
+| No utiliza `throws Exception` sin necesidad | ☐      |
 
 El material también advierte contra registrar una excepción y volver a lanzarla innecesariamente, pues puede producir múltiples mensajes para el mismo problema; cuando se requiere agregar contexto, propone envolver la excepción preservando la causa original.
 
@@ -666,61 +665,58 @@ java ProcesadorCalificaciones \<archivo\>
 
 El programa deberá manejar adecuadamente:
 
-* archivo inexistente;  
-* línea vacía;  
-* texto no numérico;  
-* calificación fuera de rango;  
-* error de lectura;  
-* archivo sin ninguna calificación válida.
+- archivo inexistente;
+- línea vacía;
+- texto no numérico;
+- calificación fuera de rango;
+- error de lectura;
+- archivo sin ninguna calificación válida.
 
 Para el último caso, diseñar una excepción:
 
-SinDatosValidosException  
----
+## SinDatosValidosException
 
 # **20\. Entregables**
 
 Cada estudiante entregar:
 
-* Liga a repositorio
-* `ProcesadorCalificaciones.java`  
-* `CalificacionInvalidaException.java`  
-* `SinDatosValidosException.java`, si se realiza el reto  
-* `calificaciones.txt`  
-* evidencia de las ejecuciones;  
-* respuestas a las preguntas de reflexión;  
-* breve explicación de qué excepciones son *checked* y cuáles *unchecked* dentro de su solución.
+- Liga a repositorio
+- `ProcesadorCalificaciones.java`
+- `CalificacionInvalidaException.java`
+- `SinDatosValidosException.java`, si se realiza el reto
+- `calificaciones.txt`
+- evidencia de las ejecuciones;
+- respuestas a las preguntas de reflexión;
+- breve explicación de qué excepciones son _checked_ y cuáles _unchecked_ dentro de su solución.
 
 # **21\. Preguntas de reflexión**
 
-1. ¿Qué diferencia existe entre lanzar y capturar una excepción?  
-2. ¿Qué función tiene `try`?  
-3. ¿Qué función tiene `catch`?  
-4. ¿Cuándo resulta útil `finally`?  
-5. ¿Qué ventaja tiene `try-with-resources`?  
-6. ¿Cuál es la diferencia entre `throw` y `throws`?  
-7. ¿Por qué conviene utilizar excepciones específicas?  
-8. ¿Cuándo tiene sentido crear una excepción personalizada?  
-9. ¿Por qué no se recomienda capturar `Throwable`?  
-10. ¿Qué efecto tiene ignorar una excepción?  
-11. ¿Qué información debería proporcionar un buen mensaje de excepción?  
+1. ¿Qué diferencia existe entre lanzar y capturar una excepción?
+2. ¿Qué función tiene `try`?
+3. ¿Qué función tiene `catch`?
+4. ¿Cuándo resulta útil `finally`?
+5. ¿Qué ventaja tiene `try-with-resources`?
+6. ¿Cuál es la diferencia entre `throw` y `throws`?
+7. ¿Por qué conviene utilizar excepciones específicas?
+8. ¿Cuándo tiene sentido crear una excepción personalizada?
+9. ¿Por qué no se recomienda capturar `Throwable`?
+10. ¿Qué efecto tiene ignorar una excepción?
+11. ¿Qué información debería proporcionar un buen mensaje de excepción?
 12. ¿En qué casos conviene propagar una excepción en lugar de capturarla inmediatamente?
 
 ---
 
 # **22\. Criterios de evaluación**
 
-| Criterio | Ponderación |
-| ----- | ----- |
-| Identificación correcta de situaciones excepcionales | 10% |
-| Uso correcto de `try-catch` | 20% |
-| Uso de excepciones específicas | 15% |
-| Uso correcto de `throw` y `throws` | 15% |
-| Implementación de excepción personalizada | 10% |
-| Uso de `try-with-resources` | 10% |
-| Aplicación de buenas prácticas | 10% |
-| Calidad y claridad del código | 5% |
-| Reflexión y evidencias | 5% |
-| **Total** | **100%** |
-
-
+| Criterio                                             | Ponderación |
+| ---------------------------------------------------- | ----------- |
+| Identificación correcta de situaciones excepcionales | 10%         |
+| Uso correcto de `try-catch`                          | 20%         |
+| Uso de excepciones específicas                       | 15%         |
+| Uso correcto de `throw` y `throws`                   | 15%         |
+| Implementación de excepción personalizada            | 10%         |
+| Uso de `try-with-resources`                          | 10%         |
+| Aplicación de buenas prácticas                       | 10%         |
+| Calidad y claridad del código                        | 5%          |
+| Reflexión y evidencias                               | 5%          |
+| **Total**                                            | **100%**    |
